@@ -5,6 +5,7 @@ let content = document.getElementById('content');
 let addButton = document.getElementById('add-button');
 let postOverlay = document.getElementById('post-overlay');
 let form = document.getElementById('form');
+let postAddButton = document.getElementById('add-overlay-button');
 
 
 // sending request to server
@@ -105,6 +106,8 @@ closeOverlay.addEventListener('click', function() {
 
 addButton.addEventListener('click', function() {
     postOverlay.classList.add('active');
+    document.getElementById('title').value = ' ';
+    document.getElementById('Description').value = ' ';
 })
 
 form.addEventListener('submit', function(event) {
@@ -123,4 +126,41 @@ form.addEventListener('submit', function(event) {
     .then((response) => response.json())
     .then((json) => console.log(json));
     console.log(formData);
+})
+
+
+// adds posts to the page
+postAddButton.addEventListener('click', function(event) {
+    postOverlay.classList.remove('active');
+
+    let addedPost = document.createElement('div');
+    addedPost.classList.add('posts');
+        
+    let h2 = document.createElement('h2');
+    h2.innerText = document.getElementById('title').value;
+
+    let h3 = document.createElement('h3');
+    h3.innerText = document.getElementById('Description').value;
+
+    let deleteButton = document.createElement('button');
+    deleteButton.innerText = 'Delete';
+
+    addedPost.appendChild(h2);
+    addedPost.appendChild(h3);
+    addedPost.appendChild(deleteButton);
+
+    mainWrapperPost.appendChild(addedPost);
+
+    deleteButton.addEventListener('click', function(event) {
+        event.stopPropagation();
+        addedPost.classList.add('block-deleting')
+    });
+
+
+    // opening overlay not finished
+    addedPost.addEventListener('click', function(event) {
+        let id = event.target.getAttribute('data-id');
+        openOverlay(id);
+    });
+
 })

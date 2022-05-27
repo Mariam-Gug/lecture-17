@@ -24,9 +24,6 @@
     font-size: 30px;
     cursor: pointer;
 }
-.block-deleting {
-    display: none;
-}
 .add-button {
     position: fixed;
     bottom: 20px;
@@ -47,6 +44,12 @@
     font-size: 30px;
     font-weight: bold;
 }
+.block-deleting {
+    display: none;
+}
 .active {
     display: block;
+}
+.display-none {
+    display: none;
 }
