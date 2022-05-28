@@ -110,6 +110,10 @@ addButton.addEventListener('click', function() {
     document.getElementById('Description').value = ' ';
 })
 
+
+
+// creating and adding ID to new posts
+
 form.addEventListener('submit', function(event) {
     event.preventDefault();
     let formData = {
@@ -126,11 +130,7 @@ form.addEventListener('submit', function(event) {
     .then((response) => response.json())
     .then((json) => console.log(json));
     console.log(formData);
-})
 
-
-// adds posts to the page
-postAddButton.addEventListener('click', function(event) {
     postOverlay.classList.remove('active');
 
     let addedPost = document.createElement('div');
@@ -145,6 +145,10 @@ postAddButton.addEventListener('click', function(event) {
     let deleteButton = document.createElement('button');
     deleteButton.innerText = 'Delete';
 
+    let addedPostId = document.createElement('h2');
+    addedPostId.innerHTML = mainWrapperPost.getElementsByTagName('div').length + 1;
+
+    addedPost.appendChild(addedPostId);
     addedPost.appendChild(h2);
     addedPost.appendChild(h3);
     addedPost.appendChild(deleteButton);
@@ -155,12 +159,7 @@ postAddButton.addEventListener('click', function(event) {
         event.stopPropagation();
         addedPost.classList.add('block-deleting')
     });
-
-
-    // opening overlay not finished
-    addedPost.addEventListener('click', function(event) {
-        let id = event.target.getAttribute('data-id');
-        openOverlay(id);
-    });
-
 })
+
+
+
